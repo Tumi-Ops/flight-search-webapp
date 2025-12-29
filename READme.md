@@ -15,7 +15,7 @@ A Flask-based flight search web application that allows users to search for the 
 
 ## AWS Architecture
 
-![Architecture Diagram](flightSyte-architecture.png)
+![Architecture Diagram](FlightSyte-architecture.png)
 
 ## How it Works
 1) The web application can be run locally or inside Docker.
