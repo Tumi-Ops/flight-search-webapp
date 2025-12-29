@@ -1,6 +1,7 @@
 # This file harbors the amadeus API objects.
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 # trip-nav-link active
 amadeus_apikey = os.environ["AMS_API_KEY"]
@@ -14,3 +15,7 @@ amadeus_token_params = {
 amadeus_endpoint = os.environ["AMADEUS_FLIGHT_OFFERS"]
 amadeus_cities_endpoint = os.environ["AMADEUS_CITIES_ENDPOINT"]
 amadeus_locations_endpoint = os.environ["AMADEUS_LOCATIONS"]
+
+
+
+

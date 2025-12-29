@@ -25,7 +25,11 @@
                    class="nav-link px-2 {% if active_page=='faq' %}active{% endif %}">FAQs</a>
             </li>
             <li><a href="{{ url_for('about') }}"
-                   class="nav-link px-2 {% if active_page=='about' %}active{% endif %}">About</a></li>
+                   class="nav-link px-2 {% if active_page=='about' %}active{% endif %}">About</a>
+            </li>
+            <li><a href="{{ url_for('contact') }}"
+                   class="nav-link px-2 {% if active_page=='contact' %}active{% endif %}">Contact</a>
+            </li>
         </ul>
 
         <div class="col-md-3 text-end">

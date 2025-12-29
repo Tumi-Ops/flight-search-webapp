@@ -28,7 +28,7 @@
 
         <div class="trip-form-card">
             <div class="trip-card-header-custom">
-                <nav class="justify-content-center">
+                <nav class="row justify-content-center">
                     <nav>
                         <div class="nav trip-nav-tabs justify-content-center" id="trip-nav-tab" role="tablist">
                             <a class="trip-nav-link active" id="set-alert-tab" data-bs-toggle="tab"
@@ -43,227 +43,222 @@
                     </nav>
                 </nav>
             </div>
-        </div>
 
-        <!-- Tabs -->
 
-        <div class="card-body p-4">
+            <!-- Tabs -->
+            <div class="card-body">
 
-            <div class="tab-content" id="alertTabsContent">
-                <!-- =========================== -->
-                <!-- TAB 1: THE TRIP ALERT FORM  -->
-                <!-- =========================== -->
-                <div class="tab-pane fade show active"
-                     id="set-alert"
-                     role="tabpanel"
-                     aria-labelledby="set-alert-tab">
-                    <div class="search-form-card">
-                        <div class="card-body p-4">
+                <div class="tab-content" id="alertTabsContent">
+                    <!-- =========================== -->
+                    <!-- TAB 1: THE TRIP ALERT FORM  -->
+                    <!-- =========================== -->
+                    <div class="tab-pane fade show active"
+                         id="set-alert"
+                         role="tabpanel"
+                         aria-labelledby="set-alert-tab">
+                        <div class="search-form-card">
+                            <div class="card-body p-4">
 
-                            <form method="POST" action="{{ url_for('trip_alert') }}" novalidate>
-                                {{ form.hidden_tag() }}
+                                <form method="POST" action="{{ url_for('trip_alert') }}" novalidate>
+                                    {{ form.hidden_tag() }}
 
-                                <!-- Origin / Destination -->
-                                <div class="row mb-4">
-                                    <div class="col-md-6 mb-3 mb-md-0">
-                                        <label class="form-label navy-label">{{ form.origin_location.label.text
-                                            }}</label>
-                                        {{ form.origin_location(class="form-control custom-input" + (" is-invalid"
-                                        if
-                                        form.origin_location.errors else "")) }}
-                                        {% if form.origin_location.errors %}
+                                    <!-- Origin / Destination -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6 mb-3 mb-md-0">
+                                            <label class="form-label navy-label">{{ form.origin_location.label.text
+                                                }}</label>
+                                            {{ form.origin_location(class="form-control custom-input" + (" is-invalid"
+                                            if
+                                            form.origin_location.errors else "")) }}
+                                            {% if form.origin_location.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.origin_location.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label navy-label">{{ form.destination_city.label.text
+                                                }}</label>
+                                            {{ form.destination_city(class="form-control custom-input" + (" is-invalid"
+                                            if
+                                            form.destination_city.errors else "")) }}
+                                            {% if form.destination_city.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.destination_city.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <!-- Dates -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-6 mb-3 mb-md-0">
+                                            <label class="form-label navy-label">{{ form.from_date.label.text }}</label>
+                                            {{ form.from_date(class="form-control custom-input" + (" is-invalid" if
+                                            form.from_date.errors else ""), type="date") }}
+                                            {% if form.from_date.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.from_date.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label navy-label">{{ form.to_date.label.text }}</label>
+                                            {{ form.to_date(class="form-control custom-input" + (" is-invalid" if
+                                            form.to_date.errors else ""), type="date") }}
+                                            {% if form.to_date.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.to_date.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <!-- Passengers -->
+                                    <div class="row mb-4">
+                                        <div class="col-md-4 mb-3 mb-md-0">
+                                            <label class="form-label navy-label">{{ form.adults.label.text }}</label>
+                                            {{ form.adults(class="form-control custom-input" + (" is-invalid" if
+                                            form.adults.errors else ""), type="number", min=0, max=9) }}
+                                            {% if form.adults.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.adults.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-md-4 mb-3 mb-md-0">
+                                            <label class="form-label navy-label">{{ form.children.label.text }}</label>
+                                            {{ form.children(class="form-control custom-input" + (" is-invalid" if
+                                            form.children.errors else ""), type="number", min=0, max=9) }}
+                                            {% if form.children.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.children.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="form-label navy-label">{{ form.infants.label.text }}</label>
+                                            {{ form.infants(class="form-control custom-input" + (" is-invalid" if
+                                            form.infants.errors else ""), type="number", min=0, max=9) }}
+                                            {% if form.infants.errors %}
+                                            <div class="invalid-feedback">
+                                                {% for error in form.infants.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <!-- Max Price -->
+                                    <div class="mb-4">
+                                        <label class="form-label navy-label">{{ form.max_price.label.text }}</label>
+                                        {{ form.max_price(class="form-control custom-input" + (" is-invalid" if
+                                        form.max_price.errors else ""), type="number", min=1000, max=100000) }}
+                                        {% if form.max_price.errors %}
                                         <div class="invalid-feedback">
-                                            {% for error in form.origin_location.errors %}{{ error }}{% endfor %}
+                                            {% for error in form.max_price.errors %}{{ error }}{% endfor %}
                                         </div>
                                         {% endif %}
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <label class="form-label navy-label">{{ form.destination_city.label.text
-                                            }}</label>
-                                        {{ form.destination_city(class="form-control custom-input" + (" is-invalid" if
-                                        form.destination_city.errors else "")) }}
-                                        {% if form.destination_city.errors %}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.destination_city.errors %}{{ error }}{% endfor %}
-                                        </div>
-                                        {% endif %}
+                                    <div class="d-grid">
+                                        {{ form.submit(class="btn btn-navy btn-lg") }}
                                     </div>
-                                </div>
+                                </form>
 
-                                <!-- Dates -->
-                                <div class="row mb-4">
-                                    <div class="col-md-6 mb-3 mb-md-0">
-                                        <label class="form-label navy-label">{{ form.from_date.label.text }}</label>
-                                        {{ form.from_date(class="form-control custom-input" + (" is-invalid" if
-                                        form.from_date.errors else ""), type="date") }}
-                                        {% if form.from_date.errors %}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.from_date.errors %}{{ error }}{% endfor %}
-                                        </div>
-                                        {% endif %}
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label class="form-label navy-label">{{ form.to_date.label.text }}</label>
-                                        {{ form.to_date(class="form-control custom-input" + (" is-invalid" if
-                                        form.to_date.errors else ""), type="date") }}
-                                        {% if form.to_date.errors %}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.to_date.errors %}{{ error }}{% endfor %}
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-
-                                <!-- Passengers -->
-                                <div class="row mb-4">
-                                    <div class="col-md-4 mb-3 mb-md-0">
-                                        <label class="form-label navy-label">{{ form.adults.label.text }}</label>
-                                        {{ form.adults(class="form-control custom-input" + (" is-invalid" if
-                                        form.adults.errors else ""), type="number", min=0, max=9) }}
-                                        {% if form.adults.errors %}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.adults.errors %}{{ error }}{% endfor %}
-                                        </div>
-                                        {% endif %}
-                                    </div>
-
-                                    <div class="col-md-4 mb-3 mb-md-0">
-                                        <label class="form-label navy-label">{{ form.children.label.text }}</label>
-                                        {{ form.children(class="form-control custom-input" + (" is-invalid" if
-                                        form.children.errors else ""), type="number", min=0, max=9) }}
-                                        {% if form.children.errors %}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.children.errors %}{{ error }}{% endfor %}
-                                        </div>
-                                        {% endif %}
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="form-label navy-label">{{ form.infants.label.text }}</label>
-                                        {{ form.infants(class="form-control custom-input" + (" is-invalid" if
-                                        form.infants.errors else ""), type="number", min=0, max=9) }}
-                                        {% if form.infants.errors %}
-                                        <div class="invalid-feedback">
-                                            {% for error in form.infants.errors %}{{ error }}{% endfor %}
-                                        </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-
-                                <!-- Max Price -->
-                                <div class="mb-4">
-                                    <label class="form-label navy-label">{{ form.max_price.label.text }}</label>
-                                    {{ form.max_price(class="form-control custom-input" + (" is-invalid" if
-                                    form.max_price.errors else ""), type="number", min=1000, max=100000) }}
-                                    {% if form.max_price.errors %}
-                                    <div class="invalid-feedback">
-                                        {% for error in form.max_price.errors %}{{ error }}{% endfor %}
-                                    </div>
-                                    {% endif %}
-                                </div>
-
-                                <div class="d-grid">
-                                    {{ form.submit(class="btn btn-navy btn-lg") }}
-                                </div>
-                            </form>
-
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- ======================= -->
-                <!-- TAB 2: LIVE ALERT TABLE -->
-                <!-- ======================= -->
-                <div class="tab-pane fade"
-                     id="live-alerts"
-                     role="tabpanel"
-                     aria-labelledby="live-alerts-tab">
+                    <!-- ======================= -->
+                    <!-- TAB 2: LIVE ALERT TABLE -->
+                    <!-- ======================= -->
+                    <div class="tab-pane fade"
+                         id="live-alerts"
+                         role="tabpanel"
+                         aria-labelledby="live-alerts-tab">
 
-                    <div class="search-form-card">
+                        <div class="search-form-card">
 
-                        <div class="card-body p-4">
+                            <div class="card-body p-4">
 
-                            {% if alerts|length == 0 %}
-                            <p class="text-center text-muted mt-3">You have no active alerts.</p>
+                                {% if alerts|length == 0 %}
+                                <p class="text-center text-muted mt-3">You have no active alerts.</p>
 
-                            {% else %}
+                                {% else %}
 
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle table-bordered">
-                                    <thead class="table-light">
-                                    <tr>
-                                        <th><i class="bi bi-geo-alt-fill me-1"></i>Origin</th>
-                                        <th><i class="bi bi-airplane me-1"></i>Destination</th>
-                                        <th><i class="bi bi-cash-stack me-1"></i>Max Price</th>
-                                        <th><i class="bi bi-calendar-event me-1"></i>From</th>
-                                        <th><i class="bi bi-calendar-check me-1"></i>To</th>
-                                        <th><i class="bi bi-people-fill me-1"></i>Adults</th>
-                                        <th>Children</th>
-                                        <th>Infants</th>
-                                        <th class="text-center"><i class="bi bi-gear-fill"></i> Actions</th>
-                                    </tr>
-                                    </thead>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle table-bordered">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th><i class="bi bi-geo-alt-fill me-1"></i>Origin</th>
+                                            <th><i class="bi bi-airplane me-1"></i>Destination</th>
+                                            <th><i class="bi bi-cash-stack me-1"></i>Max Price</th>
+                                            <th><i class="bi bi-calendar-event me-1"></i>From</th>
+                                            <th><i class="bi bi-calendar-check me-1"></i>To</th>
+                                            <th><i class="bi bi-people-fill me-1"></i>Adults</th>
+                                            <th>Children</th>
+                                            <th>Infants</th>
+                                            <th class="text-center"><i class="bi bi-gear-fill"></i> Actions</th>
+                                        </tr>
+                                        </thead>
 
-                                    <tbody>
+                                        <tbody>
 
-                                    {% for alert in alerts %}
-                                    <tr>
-                                        <td>{{ alert.origin_location }}</td>
-                                        <td>{{ alert.destination_city }}</td>
+                                        {% for alert in alerts["alerts"] %}
+                                        <tr>
+                                            <td>{{ alert.origin_location }}</td>
+                                            <td>{{ alert.destination_city }}</td>
 
-                                        <td>
+                                            <td>
                                     <span class="badge bg-success px-3 py-2">
                                         R {{ alert.max_price }}
                                     </span>
-                                        </td>
+                                            </td>
 
-                                        <td>
+                                            <td>
                                     <span class="badge bg-info text-dark px-3 py-2">
                                         {{ alert.from_date }}
                                     </span>
-                                        </td>
+                                            </td>
 
-                                        <td>
+                                            <td>
                                     <span class="badge bg-info text-dark px-3 py-2">
                                         {{ alert.to_date }}
                                     </span>
-                                        </td>
+                                            </td>
 
-                                        <td>{{ alert.adults }}</td>
-                                        <td>{{ alert.children }}</td>
-                                        <td>{{ alert.infants }}</td>
+                                            <td>{{ alert.adults }}</td>
+                                            <td>{{ alert.children }}</td>
+                                            <td>{{ alert.infants }}</td>
 
-                                        <!-- Action Buttons -->
-                                        <td class="text-center">
-                                            <div class="d-flex justify-content-center gap-2">
+                                            <!-- Action Buttons -->
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center gap-2">
 
-                                                <!-- Edit Button -->
-                                                <a href="{{ url_for('edit_alert', alert_id=alert.id) }}"
-                                                   class="btn btn-sm"
-                                                   style="background: var(--navy-accent); color:white; border-radius: 8px;">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                </a>
+                                                    <!-- Delete Button -->
+                                                    <form method="POST"
+                                                          action="{{ url_for('delete_alert', alert_id=alert.created_at) }}"
+                                                          onsubmit="return confirm('Are you sure you want to delete this alert?');">
+                                                        <button class="btn btn-sm btn-danger"
+                                                                style="border-radius: 8px;">
+                                                            <i class="bi bi-trash-fill"></i>
+                                                        </button>
+                                                    </form>
 
-                                                <!-- Delete Button -->
-                                                <form method="POST"
-                                                      action="{{ url_for('delete_alert', alert_id=alert.id) }}"
-                                                      onsubmit="return confirm('Are you sure you want to delete this alert?');">
-                                                    <button class="btn btn-sm btn-danger"
-                                                            style="border-radius: 8px;">
-                                                        <i class="bi bi-trash-fill"></i>
-                                                    </button>
-                                                </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
 
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                                </div>
+                                {% endif %}
                             </div>
-                            {% endif %}
                         </div>
                     </div>
                 </div>

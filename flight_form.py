@@ -4,6 +4,7 @@ from wtforms.fields.datetime import DateField
 from wtforms.fields.numeric import IntegerField
 from wtforms.validators import DataRequired, NumberRange, Length, EqualTo
 
+
 class FlightForm(FlaskForm):
     city = StringField('Destination City, e.g. Paris', validators=[DataRequired()])
     origin_location = StringField('Origin City, e.g. Johannesburg', validators=[DataRequired()])
@@ -18,6 +19,7 @@ class FlightForm(FlaskForm):
     return_date = DateField('Return Date', validators=[DataRequired()])
     submit = SubmitField(label="Check Flights")
 
+
 class TripAlertForm(FlaskForm):
     destination_city = StringField('Destination City, e.g. Paris', validators=[DataRequired()])
     origin_location = StringField('Origin City, e.g. Johannesburg', validators=[DataRequired()])
@@ -28,3 +30,7 @@ class TripAlertForm(FlaskForm):
     from_date = DateField('Departure Date', validators=[DataRequired()])
     to_date = DateField('Return Date', validators=[DataRequired()])
     submit = SubmitField(label="Set Trip")
+
+class SubscribeForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    submit = SubmitField(label="Subscribe")
