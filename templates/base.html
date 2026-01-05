@@ -49,6 +49,8 @@
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/results.css') }}"/>
     <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/chatbot.css') }}"/>
+    <link rel="stylesheet"
           href="{{ url_for('static', filename='css/footer.css') }}"/>
     {% endblock %}
 
@@ -84,6 +86,84 @@
         lastScroll = currentScroll;
     });
 </script>
+<div id="chatbot-container">
+    <div id="chatbot-header">Ask FlightBot ✈️</div>
+
+    <div id="chatbot-messages"></div>
+
+    <div id="chatbot-input">
+        <input type="text" id="chat-input" placeholder="Ask me about cities..." />
+        <button onclick="sendMessage()">➤</button>
+    </div>
+</div>
+<script>
+function toggleChat() {
+    const chat = document.getElementById("chatbot-container");
+    chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+}
+
+async function sendMessage() {
+    const input = document.getElementById("chat-input");
+    const message = input.value.trim();
+    if (!message) return;
+
+    appendMessage("user", message);
+    input.value = "";
+
+    const thinkingId = appendThinking();
+
+    try {
+        const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message })
+        });
+
+        const data = await response.json();
+
+        removeThinking(thinkingId);
+
+        if (!response.ok) {
+            appendMessage("bot", data.error || "Something went wrong.");
+            return;
+        }
+
+        appendMessage("bot", data.reply);
+
+    } catch (error) {
+        removeThinking(thinkingId);
+        appendMessage("bot", "Network error. Please try again.");
+    }
+}
+
+function appendThinking() {
+    const container = document.getElementById("chatbot-messages");
+    const msg = document.createElement("div");
+    msg.className = "bot-thinking";
+    msg.innerText = "FlightBot is thinking.";
+    msg.id = "thinking-" + Date.now();
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+    return msg.id;
+}
+
+function removeThinking(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+}
+
+function appendMessage(sender, text) {
+    const container = document.getElementById("chatbot-messages");
+    const msg = document.createElement("div");
+    msg.style.marginBottom = "8px";
+    msg.style.textAlign = sender === "user" ? "right" : "left";
+    msg.innerText = text;
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+}
+</script>
+
+<button id="chatbot-toggle" onclick="toggleChat()">💬</button>
 
 </body>
 </html>

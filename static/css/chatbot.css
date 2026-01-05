@@ -1,0 +1,106 @@
+#chatbot-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--navy-accent);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    animation: fadeUp 0.8s ease forwards;
+}
+
+#chatbot-container {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    height: 420px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    animation: slideIn 0.8s ease forwards;
+}
+
+#chatbot-header {
+    padding: 12px;
+    background: var(--navy-blue);
+    color: white;
+    font-weight: 600;
+    border-radius: 16px 16px 0 0;
+    animation: fadeDown 1s ease forwards;
+}
+
+#chatbot-messages {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    animation: fadeUp 1s ease forwards;
+}
+
+#chatbot-input {
+    display: flex;
+    border-top: 1px solid #eee;
+    animation: fadeUp 1s ease forwards;
+}
+
+#chatbot-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    animation: fadeUp 1s ease forwards;
+}
+
+#chatbot-input button {
+    background: var(--navy-accent);
+    color: white;
+    border: none;
+    padding: 0 16px;
+    cursor: pointer;
+    animation: slideIn 1s ease forwards;
+}
+
+.bot-thinking {
+    font-style: italic;
+    color: #666;
+}
+
+@keyframes dots {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
+}
+
+.bot-thinking::after {
+  content: ".";
+  animation: dots 1.2s infinite;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideFade {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}

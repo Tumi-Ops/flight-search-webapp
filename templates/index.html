@@ -57,13 +57,13 @@
 
                             <div class="col-md-6">
                                 <label class="form-label navy-label">
-                                    {{ form.city.label.text }}
+                                    {{ form.destination_city.label.text }}
                                 </label>
-                                {{ form.city(class="form-control custom-input" + (" is-invalid" if form.city.errors else
+                                {{ form.destination_city(class="form-control custom-input" + (" is-invalid" if form.destination_city.errors else
                                 "")) }}
-                                {% if form.city.errors %}
+                                {% if form.destination_city.errors %}
                                 <div class="invalid-feedback">
-                                    {% for error in form.city.errors %}
+                                    {% for error in form.destination_city.errors %}
                                     {{ error }}
                                     {% endfor %}
                                 </div>
@@ -75,13 +75,13 @@
                         <div class="row mb-4">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label class="form-label navy-label">
-                                    {{ form.departure_date.label.text }}
+                                    {{ form.from_date.label.text }}
                                 </label>
-                                {{ form.departure_date(class="form-control custom-input" + (" is-invalid" if
-                                form.departure_date.errors else ""), type="date") }}
-                                {% if form.departure_date.errors %}
+                                {{ form.from_date(class="form-control custom-input" + (" is-invalid" if
+                                form.from_date.errors else ""), type="date") }}
+                                {% if form.from_date.errors %}
                                 <div class="invalid-feedback">
-                                    {% for error in form.departure_date.errors %}
+                                    {% for error in form.from_date.errors %}
                                     {{ error }}
                                     {% endfor %}
                                 </div>
@@ -90,13 +90,13 @@
 
                             <div class="col-md-6">
                                 <label class="form-label navy-label">
-                                    {{ form.return_date.label.text }}
+                                    {{ form.to_date.label.text }}
                                 </label>
-                                {{ form.return_date(class="form-control custom-input" + (" is-invalid" if
-                                form.return_date.errors else ""), type="date") }}
-                                {% if form.return_date.errors %}
+                                {{ form.to_date(class="form-control custom-input" + (" is-invalid" if
+                                form.to_date.errors else ""), type="date") }}
+                                {% if form.to_date.errors %}
                                 <div class="invalid-feedback">
-                                    {% for error in form.return_date.errors %}
+                                    {% for error in form.to_date.errors %}
                                     {{ error }}
                                     {% endfor %}
                                 </div>

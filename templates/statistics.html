@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include "header.html" %}
+
+<!-- HERO -->
+<div class="about-hero">
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-content text-center">
+        <h1 class="about-title">Travel Statistics</h1>
+        <p class="about-subtitle">Learn the lands.</p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{category}}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+</div>
+
+<div class="container my-5">
+
+
+</div>
+
+{% include "footer.html" %}
+{% endblock %}

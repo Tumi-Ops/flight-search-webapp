@@ -3,12 +3,32 @@
 A Flask-based flight search web application that allows users to search for the cheapest flight deals using the Amadeus API
 & set trip alerts that will notify users when a flight is available at a set price. 
 
+## Project Notes
+This project demonstrates:
+* Designing a serverless, event-driven architecture on AWS
+* Secure user authentication and authorization using Amazon Cognito (JWT-based access)
+* Backend API protection and request validation via Amazon API Gateway
+* DynamoDB data modeling optimized for cost-efficient querying and scheduled processing
+* Scheduled background processing using Amazon EventBridge and Lambda
+* Secure secret handling with AWS Parameter Store
+* Least-privilege IAM policies applied across all AWS resources
+* Cost-aware design decisions, including the use of on-demand billing and query-based access patterns
+* Scalable measures put in place to ensure reliability of resources such as API Gateway throttling and Lambda concurrency to mitigate failures
+* Containerized for CI/CD purposes
+* Infrastructure as Code using Terraform for centralized management, deployments and monitoring
+* Observability and operational monitoring via Amazon CloudWatch
+* AI-assisted user experience using Amazon Bedrock (Nova Lite)
+
+This repository reflects a production-style separation of concerns, with a clear boundary between frontend logic, authentication, backend APIs, and asynchronous processing.
+
 ## Features
 
 - Search for flights by destination and origin cities.
 - Set a trip alert that notifies users when flights are available.
 - Specify flight details i.e. number of passengers, travel class, travel dates etc.
 - View flight results with pricing and details.
+- Chatbot assistance for city names with IATA codes to fit API parameters.
+- Site news communication through email.
 - Communication with Amadeus Flight Offers API.
 - Built with Flask, Bootstrap 5, Jinja2 templates, Flask-WTF, WTForms, Flask sessions, CSRF protection.
 - Integrated with AWS as Backend.
@@ -26,13 +46,13 @@ A Flask-based flight search web application that allows users to search for the 
 6) The AWS backend consists of multiple Lambda functions, each with a clearly defined responsibility.
 7) A write Lambda stores trip alert data in DynamoDB, a read Lambda queries user alerts, and a delete Lambda removes or updates alert records.
 8) The subscriber Lambda subscribes emails to an SNS Topic, enabling subscribers to receive news about the site though email.
-8) Finally, a scheduled processor Lambda is triggered by an Amazon EventBridge cron rule, which queries DynamoDB for active alerts and checks for available flights.
+8) A scheduled processor Lambda is triggered by an Amazon EventBridge cron rule, which queries DynamoDB for active alerts and checks for available flights.
 9) The processor Lambda securely retrieves third-party API credentials and email credentials from AWS Systems Manager Parameter Store.
 10) When a flight that matches a users max price criteria is found, the Lambda sends a notification email to the user using the SMTP protocol.
 11) All AWS services operate with least-privilege IAM permissions following security best practices.
 12) Amazon CloudWatch is used to monitor Lambda executions, API Gateway requests, and application logs.
 13) Within the application, users can also use a chatbot to retrieve city names and corresponding IATA codes.
-14) The chatbot is powered by Amazon Bedrock using the Amazon Nova Lite foundation model.
+14) The chatbot is powered by a Lambda which uses Amazon Bedrock using the Amazon Nova Lite foundation model.
 
 
 ## Requirements
@@ -69,7 +89,7 @@ A Flask-based flight search web application that allows users to search for the 
  
 3. Run the program:
     ```bash
-    docker run -it tomdocks7/flightsyte
+    docker run tomdocks7/flightsyte -p 5000:5000
    ```
 
 
@@ -121,20 +141,3 @@ A Flask-based flight search web application that allows users to search for the 
 ***NB: This was constructed to merely display the developers capabilities in terms of software and cloud engineering knowledge and skills.***
 
 
-## Project Notes
-This project demonstrates:
-* Designing a serverless, event-driven architecture on AWS
-* Secure user authentication and authorization using Amazon Cognito (JWT-based access)
-* Backend API protection and request validation via Amazon API Gateway
-* DynamoDB data modeling optimized for cost-efficient querying and scheduled processing
-* Scheduled background processing using Amazon EventBridge and Lambda
-* Secure secret handling with AWS Parameter Store
-* Least-privilege IAM policies applied across all AWS resources
-* Cost-aware design decisions, including the use of on-demand billing and query-based access patterns
-* Scalable measures put in place to ensure reliability of resources and failure handling capabilities implementation 
-* Containerized for CI/CD purposes
-* Infrastructure as Code using Terraform for centralized management, deployments and monitoring
-* Observability and operational monitoring via Amazon CloudWatch
-* AI-assisted user experience using Amazon Bedrock (Nova Lite)
-
-This repository reflects a production-style separation of concerns, with a clear boundary between frontend logic, authentication, backend APIs, and asynchronous processing.
