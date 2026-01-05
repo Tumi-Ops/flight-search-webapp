@@ -140,7 +140,7 @@ def trip_alert():
                     print(f"\n✅ {api_gateway_response.text}")
                     flash(
                         "Trip set successfully! You will be notified by email when it is found!"
-                        "\nCheck the 'Live Trips' tab, to view your trip.",
+                        "\nCheck the 'Live Trips' tab, to view your trip!",
                         "success",
                     )
                 else:
