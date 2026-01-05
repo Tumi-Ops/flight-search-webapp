@@ -25,8 +25,8 @@ CHATBOT_URL = "https://harperygxa.execute-api.eu-north-1.amazonaws.com/chatbot"
 
 app = Flask(__name__)
 Bootstrap5(app)
-app.config['PREFERRED_URL_SCHEME'] = 'http'
-app.config['SERVER_NAME'] = 'localhost:5000'
+app.config["PREFERRED_URL_SCHEME"] = "http"
+app.config["SERVER_NAME"] = "localhost:5000"
 app.config["SECRET_KEY"] = "your-secret-key-here"
 app.secret_key = os.urandom(24)  # Use a secure random key in production
 
@@ -46,7 +46,7 @@ oauth.register(
 def login():
     # redirect_uri = url_for('authorize', _external=True)
     # return oauth.oidc.authorize_redirect(redirect_uri)
-    return oauth.oidc.authorize_redirect('http://localhost:5000/authorize')
+    return oauth.oidc.authorize_redirect("http://localhost:5000/authorize")
 
 
 @app.route("/authorize")
@@ -311,5 +311,6 @@ def search_for_flight():
         "return_date": form.to_date.data.strftime("%Y-%m-%d"),
     }
 
+
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5000)
