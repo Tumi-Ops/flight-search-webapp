@@ -1,4 +1,4 @@
-name: Build & Publish Auto Birthday Messenger Docker Image
+name: Build & Publish FlightSyte Docker Image
 
 on:
   push:
