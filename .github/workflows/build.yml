@@ -47,7 +47,7 @@ jobs:
         uses: actions/checkout@v5
         
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@5.1.1
+        uses: aws-actions/configure-aws-credentials@v5.1.1
         with:
           aws-region: eu-north-1
           role-to-assume: arn:aws:iam::408852977582:role/git-accessor
