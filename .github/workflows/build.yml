@@ -39,7 +39,7 @@ jobs:
       - name: Run Ruff formatter check
         run: ruff format --check .
         
-  ecr:
+  push-to-ecr:
     needs: lint-test
     runs-on: ubuntu-latest
     steps:   
