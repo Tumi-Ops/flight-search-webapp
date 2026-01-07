@@ -85,6 +85,14 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
+# Terraform
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfstate.*
+
+# Terraform crash logs
+crash.log
+
 # IPython
 profile_default/
 ipython_config.py

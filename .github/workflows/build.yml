@@ -1,25 +1,31 @@
-name: Build & Publish FlightSyte Docker Image
-
+name: "Build & Publish FlightSyte Docker Image"
+#
 on:
   push:
-    branches: [master]
+    branches: [ main ]
     paths:
+      - "templates/**"
+      - "static/**"
       - "**.py"
       - "Dockerfile"
       - "requirements.txt"
-      - "terraform/**"
-      
+
 # Need ID token write permission to use OIDC
 permissions:
   contents: read
   id-token: write
-    
+
 jobs:
-  lint-test:
+  lint-test: # Performs lint checks for python code
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
 
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout
+        uses: actions/checkout@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -38,21 +44,22 @@ jobs:
 
       - name: Run Ruff formatter check
         run: ruff format --check .
-        
+
   push-to-ecr:
     needs: lint-test
     runs-on: ubuntu-latest
-    steps:   
+    steps:
       - name: Checkout repo
         uses: actions/checkout@v5
-        
+
+      # Uses OIDC with GitHub as web identity to reduce security risk
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v5.1.1
         with:
-          aws-region: eu-north-1
-          role-to-assume: arn:aws:iam::408852977582:role/git-accessor
+          aws-region: ${{ vars.AWS_REGION }}
+          role-to-assume: ${{ vars.ROLE_ARN }}
           role-session-name: ECRSession
-      
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
@@ -60,7 +67,7 @@ jobs:
       - name: Build, tag, and push docker image to Amazon ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: flightsyte-repo
+          REPOSITORY: ${{ vars.ECR_REPO }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build \
