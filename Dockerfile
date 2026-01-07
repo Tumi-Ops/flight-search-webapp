@@ -28,4 +28,4 @@ USER appuser
 
 EXPOSE 5000
 
-CMD ["python", "main.py"]
+CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:5000", "app:app"]
