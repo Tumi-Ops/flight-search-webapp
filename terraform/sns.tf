@@ -3,5 +3,5 @@ resource "aws_sns_topic" "flightsyte_sns_topic" {
 }
 
 resource "aws_sns_topic" "new_dummy_sns_topic" {
-  name = "Dummy"
+  name = "Dummy2"
 }
