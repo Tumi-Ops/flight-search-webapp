@@ -429,7 +429,7 @@ resource "aws_iam_role_policy_attachment" "ssm_read_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "ssm_read_policy" {
+resource "aws_iam_role_policy_attachment" "ssm_read_policy_for_exec_role" {
   role       = aws_iam_role.ecs_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
 }
