@@ -40,7 +40,7 @@ resource "aws_cognito_user_pool_domain" "main" {
 resource "aws_cognito_user_pool_client" "FlightSyteClient" {
   name                                 = "FlightSyte"
   user_pool_id                         = aws_cognito_user_pool.FlightSyteUserPool.id
-  callback_urls                        = ["http://localhost:5000/authorize"]
+  callback_urls                        = ["https://${aws_lb.flightsyte_ui_alb.dns_name}/authorize"]
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_flows                  = ["implicit", "code"]
   allowed_oauth_scopes                 = ["email", "openid"]
@@ -68,7 +68,7 @@ resource "aws_cognito_managed_login_branding" "example" {
   client_id    = aws_cognito_user_pool_client.FlightSyteClient.id
   user_pool_id = aws_cognito_user_pool.FlightSyteUserPool.id
   asset {
-    bytes      = filebase64("${path.module}/pexels-pixabay-62623.jpg")
+    bytes      = filebase64("/pexels-pixabay-62623.jpg")
     category   = "PAGE_BACKGROUND"
     color_mode = "DARK"
     extension  = "JPEG"

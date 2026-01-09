@@ -14,7 +14,10 @@ This project demonstrates:
 * Least-privilege IAM policies applied across all AWS resources
 * Cost-aware design decisions, including the use of on-demand billing and query-based access patterns
 * Scalable measures put in place to ensure reliability of resources such as API Gateway throttling and Lambda concurrency to mitigate failures
-* Containerized for CI/CD purposes
+* CI/CD pipelines using GitHub Actions workflows for container build, registry publishing, and infrastructure deployment
+* Immutable container image management with Amazon ECR
+* Containerized web workloads deployed using Amazon ECS Fargate
+* Secure HTTPS traffic handling and authentication offloaded to Application Load Balancer with Amazon Cognito
 * Infrastructure as Code using Terraform for centralized management, deployments and monitoring
 * Observability and operational monitoring via Amazon CloudWatch
 * AI-assisted user experience using Amazon Bedrock (Nova Lite)
@@ -44,14 +47,15 @@ This repository reflects a production-style separation of concerns, with a clear
 4) The frontend communicates with the AWS backend through an Amazon API Gateway (HTTP API).
 5) API Gateway validates incoming requests using a Cognito JWT authorizer, ensuring only authenticated users can access protected endpoints.
 6) The AWS backend consists of multiple Lambda functions, each with a clearly defined responsibility.
-7) A write Lambda stores trip alert data in DynamoDB, a read Lambda queries user alerts, and a delete Lambda removes or updates alert records.
-8) The subscriber Lambda subscribes emails to an SNS Topic, enabling subscribers to receive news about the site though email.
-8) A scheduled processor Lambda is triggered by an Amazon EventBridge cron rule, which queries DynamoDB for active alerts and checks for available flights.
-9) The processor Lambda securely retrieves third-party API credentials and email credentials from AWS Systems Manager Parameter Store.
-10) When a flight that matches a users max price criteria is found, the Lambda sends a notification email to the user using the SMTP protocol.
-11) All AWS services operate with least-privilege IAM permissions following security best practices.
-12) Amazon CloudWatch is used to monitor Lambda executions, API Gateway requests, and application logs.
-13) Within the application, users can also use a chatbot to retrieve city names and corresponding IATA codes.
+7) The flight search Lambda searches for available flights from the Amadeus API.
+8) The write Lambda stores trip alert data in DynamoDB, the read Lambda queries user alerts, and a delete Lambda removes or updates alert records.
+9) The subscriber Lambda subscribes emails to an SNS Topic, enabling subscribers to receive news about the site though email.
+10) A scheduled processor Lambda is triggered by an Amazon EventBridge cron rule, which queries DynamoDB for active alerts and checks for available flights.
+11) The processor Lambda securely retrieves third-party API credentials and email credentials from AWS Systems Manager Parameter Store.
+12) When a flight that matches a users max price criteria is found, the Lambda sends a notification email to the user using the SMTP protocol.
+13) All AWS services operate with least-privilege IAM permissions following security best practices.
+14) Amazon CloudWatch is used to monitor Lambda executions, API Gateway requests, and application logs.
+15) Within the application, users can also use a chatbot to retrieve city names and corresponding IATA codes.
 14) The chatbot is powered by a Lambda which uses Amazon Bedrock using the Amazon Nova Lite foundation model.
 
 

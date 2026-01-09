@@ -56,3 +56,14 @@ resource "aws_cloudwatch_log_group" "api_gw_logs" {
     Environment = "development"
   }
 }
+
+resource "aws_cloudwatch_log_group" "ecs" {
+  name              = "/ecs/FlightSyte_Task"
+  retention_in_days = 7
+
+  tags = {
+    Name        = "flightSyte"
+    Environment = "development"
+  }
+}
+#######################################################################################################################################
