@@ -68,7 +68,7 @@ resource "aws_cognito_managed_login_branding" "example" {
   client_id    = aws_cognito_user_pool_client.FlightSyteClient.id
   user_pool_id = aws_cognito_user_pool.FlightSyteUserPool.id
   asset {
-    bytes      = filebase64("/pexels-pixabay-62623.jpg")
+    bytes      = filebase64("${path.module}/pexels-pixabay-62623.jpg")
     category   = "PAGE_BACKGROUND"
     color_mode = "DARK"
     extension  = "JPEG"
