@@ -126,7 +126,7 @@ resource "aws_lb_target_group" "flightsyte_ui_tg" {
     protocol            = "HTTP"
     healthy_threshold   = 2
     unhealthy_threshold = 2
-    timeout             = 10
+    timeout             = 15
     matcher             = "200"
   }
 
