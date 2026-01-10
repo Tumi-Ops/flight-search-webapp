@@ -97,7 +97,7 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      # On push event to "main", build or change infrastructure according to Terraform configuration files
+      # On push event to "main", build or change infrastructure according to Terraform configuration filess
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |

@@ -290,7 +290,7 @@ def search_for_flight():
                 print("❌ Invalid JSON from Lambda")
                 response_json = {}
 
-            offer_messages = response_json.get("messagess", [])
+            offer_messages = response_json.get("messages", [])
             structured_flights = response_json.get("structured_flights", [])
             print("✅ Flights received from Lambda")
             print(structured_flights)
