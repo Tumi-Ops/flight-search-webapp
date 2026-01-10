@@ -1,5 +1,5 @@
 # Network configuration for ECS and ALB
-#######################################################################################################################################
+########################################################################################################################
 
 # Availability Zones
 ########################
@@ -113,26 +113,27 @@ resource "aws_lb" "flightsyte_ui_alb" {
 
 resource "aws_lb_target_group" "flightsyte_ui_tg" {
   name        = "flightsyte-ui-tg"
+  target_type = "ip"
   port        = 5000
   protocol    = "HTTP"
-  target_type = "ip"
-
-  vpc_id = aws_vpc.flightsyte_vpc.id
+  vpc_id      = aws_vpc.flightsyte_vpc.id
 
   health_check {
     enabled             = true
     interval            = 30
-    path                = "/"
+    path                = "/health"
     port                = "traffic-port"
     protocol            = "HTTP"
     healthy_threshold   = 2
     unhealthy_threshold = 2
-    timeout             = 5
+    timeout             = 30
+    matcher             = "200"
   }
 
   tags = {
     Name = "flightsyte-ui-tg"
   }
+
 }
 
 resource "aws_lb_listener" "flightsyte_front_end" {
@@ -238,4 +239,4 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_ecs_traffic_ipv4" {
 #-------------------------------------------------------------------------------------------------------
 
 
-#######################################################################################################################################
+########################################################################################################################

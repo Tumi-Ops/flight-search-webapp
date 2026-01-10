@@ -45,7 +45,7 @@ jobs:
         run: ruff format --check .
         continue-on-error: true
 
-  push-to-ecr:
+  push-to-ecr-and-update-ecs:
     needs: lint-test
     runs-on: ubuntu-latest
     steps:

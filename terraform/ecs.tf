@@ -57,11 +57,12 @@ resource "aws_ecs_task_definition" "flightsyte_task" {
 }
 
 resource "aws_ecs_service" "flightsyte_app" {
-  name            = "flightsyte-service"
-  cluster         = aws_ecs_cluster.ecs_cluster.id
-  task_definition = aws_ecs_task_definition.flightsyte_task.arn
-  desired_count   = 2
-  launch_type     = "FARGATE"
+  name                              = "flightsyte-service"
+  cluster                           = aws_ecs_cluster.ecs_cluster.id
+  task_definition                   = aws_ecs_task_definition.flightsyte_task.arn
+  desired_count                     = 2
+  launch_type                       = "FARGATE"
+  health_check_grace_period_seconds = 30
 
   network_configuration {
     subnets          = aws_subnet.flightsyte_private_subnet.*.id
