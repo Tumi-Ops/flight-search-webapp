@@ -28,7 +28,7 @@ app = Flask(__name__)
 Bootstrap5(app)
 app.config["PREFERRED_URL_SCHEME"] = "http"
 # app.config["PREFERRED_URL_SCHEME"] = "https" <- For when production domain is set up
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY")
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # For Signup and Login
