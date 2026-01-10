@@ -203,3 +203,10 @@ resource "aws_apigatewayv2_authorizer" "api_authorizer" {
 
   depends_on = [aws_cognito_user_pool.FlightSyteUserPool, aws_cognito_user_pool_client.FlightSyteClient]
 }
+# Logging key value pairs for api gateway logging
+# { "requestId":"$context.requestId",
+# "ip": "$context.identity.sourceIp", "requestTime":"$context.requestTime", "httpMethod":"$context.httpMethod",
+# "routeKey":"$context.routeKey", "status":"$context.status","protocol":"$context.protocol",
+# "responseLength":"$context.responseLength", "integration error": "$context.integration.error" ,
+# "Integration error message":"$context.integrationErrorMessage", "error":"$context.error.message",
+# "responseType":"$context.error.responseType", "message string":"$context.error.messageString"
