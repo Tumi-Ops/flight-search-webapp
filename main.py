@@ -43,10 +43,10 @@ oauth.register(
 ##########
 
 
-@app.route('/login')
+@app.route("/login")
 def login():
     # Alternate option to redirect to /authorize
-    redirect_uri = url_for('authorize', _external=True)
+    redirect_uri = url_for("authorize", _external=True)
     return oauth.oidc.authorize_redirect(redirect_uri)
     # return oauth.oidc.authorize_redirect('https://flightsyte-ui-alb-1830812917.eu-north-1.elb.amazonaws.com/authorize')
 
@@ -75,9 +75,11 @@ def logout():
     session.pop("user", None)
     return redirect(url_for("home"))
 
+
 @app.route("/health")
 def health():
     return "ok", 200
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -318,4 +320,4 @@ def search_for_flight():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000, host='0.0.0.0')
+    app.run(debug=True, port=5000, host="0.0.0.0")
