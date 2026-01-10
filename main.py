@@ -229,7 +229,7 @@ def contact():
         if api_gateway_response.status_code == 200:
             print(f"\n✅ {api_gateway_response.text}")
             flash(
-                "Subscription successful! \nPlease confirm your subscription in your emails to activate it!",
+                "Subscription successful!\nPlease confirm your subscription in your emails to activate it!",
                 "success",
             )
         else:
