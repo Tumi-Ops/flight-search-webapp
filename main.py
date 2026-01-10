@@ -190,7 +190,7 @@ def delete_alert(alert_id):
         )
         if api_gateway_response.status_code == 200:
             print(f"\n✅ {api_gateway_response.text}")
-            flash("Alert delete successfully!", "success")
+            flash("Alert delete successfully! ", "success")
         else:
             print(f"\n❌ {api_gateway_response.text} ")
             flash(f"{api_gateway_response.raise_for_status()}", "danger")
