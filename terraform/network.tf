@@ -120,13 +120,13 @@ resource "aws_lb_target_group" "flightsyte_ui_tg" {
 
   health_check {
     enabled             = true
-    interval            = 60
+    interval            = 30
     path                = "/health"
     port                = "traffic-port"
     protocol            = "HTTP"
     healthy_threshold   = 2
     unhealthy_threshold = 2
-    timeout             = 30
+    timeout             = 10
     matcher             = "200"
   }
 
