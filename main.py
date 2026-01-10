@@ -49,6 +49,7 @@ def login():
     redirect_uri = url_for("authorize", _external=True)
     return oauth.oidc.authorize_redirect(redirect_uri)
     # return oauth.oidc.authorize_redirect('https://flightsyte-ui-alb-1830812917.eu-north-1.elb.amazonaws.com/authorize')
+    # https://flightsyte.auth.eu-north-1.amazoncognito.com/error?error=redirect_mismatch&client_id=2l31ncbok6dl0ob72bscurc1qp
 
 
 @app.route("/authorize")
