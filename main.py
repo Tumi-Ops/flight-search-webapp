@@ -27,7 +27,7 @@ CHATBOT_URL = "https://harperygxa.execute-api.eu-north-1.amazonaws.com/chatbot"
 app = Flask(__name__)
 Bootstrap5(app)
 app.config["PREFERRED_URL_SCHEME"] = "http"
-# app.config["PREFERRED_URL_SCHEME"] = "https" <- For when production domain is setup
+# app.config["PREFERRED_URL_SCHEME"] = "https" <- For when production domain is set up
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
