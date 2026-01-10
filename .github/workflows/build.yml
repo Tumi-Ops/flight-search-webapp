@@ -79,7 +79,13 @@ jobs:
 
       - name: Download task definition
         run: |
-          aws ecs describe-task-definition --task-definition ${{ vars.ECS_TASK_DEF_FAMILY }} --query ${{ vars.TASK_DEFINITION }} > task-definition.json
+          aws ecs describe-task-definition --task-definition ${{ vars.ECS_TASK_DEF_FAMILY }} \
+          > full-task-def.json
+#          --query ${{ vars.TASK_DEFINITION }} > task-definition.json
+
+      - name: Extract task definition
+        run: |
+          jq '.taskDefinition' full-task-def.json > task-definition.json
 
       - name: Render new task definition
         id: task-def
