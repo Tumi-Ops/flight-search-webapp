@@ -172,7 +172,7 @@ resource "aws_lb_listener" "flightsyte_frontend_http" {
 #     target_group_arn = aws_lb_target_group.flightsyte_frontend_tg.arn
 #   }
 #   depends_on = [aws_acm_certificate_validation.flightsyte_acm_validation]
-#  }
+# }
 #-------------------------------------------------------------------------------------------------------
 
 # EIP
