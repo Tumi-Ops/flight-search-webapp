@@ -81,7 +81,7 @@ resource "aws_ecs_service" "flightsyte_app" {
     ignore_changes = [desired_count]
   }
 
-  depends_on = [aws_lb_listener.flightsyte_frontend_https]
+  depends_on = [aws_lb_listener.flightsyte_frontend_http]
   tags = {
     Environment = "test"
     Project     = "FlightSyte"
