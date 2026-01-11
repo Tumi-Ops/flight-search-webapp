@@ -189,7 +189,7 @@ def delete_alert(alert_id):
             url=ALERT_URL, headers=api_headers, json=payload, timeout=30
         )
         if api_gateway_response.status_code == 200:
-            print(f"\n✅ {api_gateway_response.text}")
+            print(f"\n✅{api_gateway_response.text}")
             flash("Alert delete successfully! ", "success")
         else:
             print(f"\n❌ {api_gateway_response.text} ")
