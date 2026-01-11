@@ -54,7 +54,7 @@ resource "aws_ecs_task_definition" "flightsyte_task" {
     Environment = "test"
     Project     = "FlightSyte"
   }
-  depends_on = [ aws_ecr_repository.ecr_repo ]
+  depends_on = [aws_ecr_repository.ecr_repo]
 }
 
 resource "aws_ecs_service" "flightsyte_app" {

@@ -7,7 +7,11 @@ resource "aws_acm_certificate" "flightsyte_cert" {
     create_before_destroy = true
   }
 
-    tags = {
-        Name = "flightsyte-cert"
-    }
+  tags = {
+    Name = "flightsyte-cert"
+  }
+}
+
+resource "aws_acm_certificate_validation" "flightsyte_acm_validation" {
+  certificate_arn = aws_acm_certificate.flightsyte_cert.arn
 }

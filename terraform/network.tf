@@ -152,8 +152,8 @@ resource "aws_lb_listener" "flightsyte_frontend_http" {
   default_action {
     type = "redirect"
     redirect {
-      port = 443
-      protocol = "HTTPS"
+      port        = 443
+      protocol    = "HTTPS"
       status_code = "HTTP_301"
     }
   }
@@ -164,13 +164,14 @@ resource "aws_lb_listener" "flightsyte_frontend_https" {
   port              = "443"
   protocol          = "HTTPS"
 
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = aws_acm_certificate.flightsyte_cert.arn
+  ssl_policy      = "ELBSecurityPolicy-2016-08"
+  certificate_arn = aws_acm_certificate.flightsyte_cert.arn
 
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.flightsyte_frontend_tg.arn
   }
+  depends_on = [aws_acm_certificate_validation.flightsyte_acm_validation]
 }
 #-------------------------------------------------------------------------------------------------------
 
