@@ -26,7 +26,7 @@ resource "aws_ecs_task_definition" "flightsyte_task" {
   container_definitions = jsonencode([
     {
       name  = "flightsyte"
-      image = "408852977582.dkr.ecr.eu-north-1.amazonaws.com/flightsyte-repo:latest"
+      image = "${aws_ecr_repository.ecr_repo.repository_url}:latest"
 
       portMappings = [{
         containerPort = 5000
@@ -54,6 +54,7 @@ resource "aws_ecs_task_definition" "flightsyte_task" {
     Environment = "test"
     Project     = "FlightSyte"
   }
+  depends_on = [ aws_ecr_repository.ecr_repo.repository_url ]
 }
 
 resource "aws_ecs_service" "flightsyte_app" {
@@ -71,7 +72,7 @@ resource "aws_ecs_service" "flightsyte_app" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.flightsyte_ui_tg.arn
+    target_group_arn = aws_lb_target_group.flightsyte_frontend_tg.arn
     container_name   = "flightsyte"
     container_port   = 5000
   }
@@ -80,7 +81,7 @@ resource "aws_ecs_service" "flightsyte_app" {
     ignore_changes = [desired_count]
   }
 
-  depends_on = [aws_lb_listener.flightsyte_front_end]
+  depends_on = [aws_lb_listener.flightsyte_frontend_https]
   tags = {
     Environment = "test"
     Project     = "FlightSyte"

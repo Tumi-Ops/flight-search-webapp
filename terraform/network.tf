@@ -76,12 +76,20 @@ resource "aws_security_group" "flightsyte_alb_sg" {
   vpc_id      = aws_vpc.flightsyte_vpc.id
 }
 
-resource "aws_vpc_security_group_ingress_rule" "allow_alb_tls_ipv4" {
+resource "aws_vpc_security_group_ingress_rule" "allow_alb_tls_ipv4_http" {
   security_group_id = aws_security_group.flightsyte_alb_sg.id
   cidr_ipv4         = "0.0.0.0/0"
   from_port         = 80
   ip_protocol       = "tcp"
   to_port           = 80
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4_https" {
+  security_group_id = aws_security_group.flightsyte_alb_sg.id
+  cidr_ipv4         = aws_vpc.flightsyte_vpc.cidr_block
+  from_port         = 443
+  ip_protocol       = "tcp"
+  to_port           = 443
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_alb_traffic_ipv4" {
@@ -93,8 +101,8 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_alb_traffic_ipv4" {
 
 # Application Load Balancer and Target Group
 #-------------------------------------------------------------------------------------------------------
-resource "aws_lb" "flightsyte_ui_alb" {
-  name               = "flightsyte-ui-alb"
+resource "aws_lb" "flightsyte_frontend_alb" {
+  name               = "flightsyte-frontend-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.flightsyte_alb_sg.id]
@@ -111,8 +119,8 @@ resource "aws_lb" "flightsyte_ui_alb" {
   }
 }
 
-resource "aws_lb_target_group" "flightsyte_ui_tg" {
-  name        = "flightsyte-ui-tg"
+resource "aws_lb_target_group" "flightsyte_frontend_tg" {
+  name        = "flightsyte-frontend-tg"
   target_type = "ip"
   port        = 5000
   protocol    = "HTTP"
@@ -131,19 +139,37 @@ resource "aws_lb_target_group" "flightsyte_ui_tg" {
   }
 
   tags = {
-    Name = "flightsyte-ui-tg"
+    Name = "flightsyte-frontend-tg"
   }
 
 }
 
-resource "aws_lb_listener" "flightsyte_front_end" {
-  load_balancer_arn = aws_lb.flightsyte_ui_alb.arn
+resource "aws_lb_listener" "flightsyte_frontend_http" {
+  load_balancer_arn = aws_lb.flightsyte_frontend_alb.arn
   port              = "80"
   protocol          = "HTTP"
 
   default_action {
+    type = redirect
+    redirect {
+      port = 443
+      protocol = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "flightsyte_frontend_https" {
+  load_balancer_arn = aws_lb.flightsyte_frontend_alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = aws_acm_certificate.flightsyte_cert.arn
+
+  default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.flightsyte_ui_tg.arn
+    target_group_arn = aws_lb_target_group.flightsyte_frontend_tg.arn
   }
 }
 #-------------------------------------------------------------------------------------------------------

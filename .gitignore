@@ -89,6 +89,7 @@ target/
 terraform.tfstate
 terraform.tfstate.backup
 terraform.tfstate.*
+terraform.xml
 
 # Terraform crash logs
 crash.log
