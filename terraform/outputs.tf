@@ -11,5 +11,5 @@ output "vpc_id" {
 }
 
 output "alb_dns_name" {
-  value = aws_lb.flightsyte_ui_alb.dns_name
+  value = aws_lb.flightsyte_frontend_alb.dns_name
 }

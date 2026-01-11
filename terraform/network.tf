@@ -150,7 +150,7 @@ resource "aws_lb_listener" "flightsyte_frontend_http" {
   protocol          = "HTTP"
 
   default_action {
-    type = redirect
+    type = "redirect"
     redirect {
       port = 443
       protocol = "HTTPS"
