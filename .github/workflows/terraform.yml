@@ -56,6 +56,10 @@ jobs:
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
+        
+      - name: Terraform UNlock State
+        id: unlock-state
+        run: terraform force-unlock 06bfef77-15ec-69a0-ea54-f16a52d12eea
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
