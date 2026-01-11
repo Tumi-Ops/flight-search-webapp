@@ -48,9 +48,6 @@ def login():
     # Alternate option to redirect to /authorize
     redirect_uri = url_for("authorize", _external=True)
     return oauth.oidc.authorize_redirect(redirect_uri)
-    # return oauth.oidc.authorize_redirect('https://flightsyte-ui-alb-1830812917.eu-north-1.elb.amazonaws.com/authorize')
-    # https://flightsyte.auth.eu-north-1.amazoncognito.com/error?error=redirect_mismatch&client_id=2l31ncbok6dl0ob72bscurc1qp
-
 
 @app.route("/authorize")
 def authorize():
@@ -189,7 +186,7 @@ def delete_alert(alert_id):
             url=ALERT_URL, headers=api_headers, json=payload, timeout=30
         )
         if api_gateway_response.status_code == 200:
-            print(f"\n✅{api_gateway_response.text}")
+            print(f"\n✅ {api_gateway_response.text}")
             flash("Alert delete successfully! ", "success")
         else:
             print(f"\n❌ {api_gateway_response.text} ")
