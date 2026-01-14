@@ -1,0 +1,25 @@
+# Kubernetes deployment yet to be properly scripted & tested. This is a rough understanding of how the files would work.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flightsyte-pod
+  labels:
+    app: flightsyte
+spec:
+  containers:
+    - name: flightsyte
+      image: tomdocks7/flightsyte:latest
+      envFrom:
+        - configMapRef:
+            name: flightsyte-configmap
+        - secretRef:
+            name: flightsyte-secrets
+      ports:
+        - containerPort: 5000
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "500m"
+          memory: "256Mi"

@@ -16,28 +16,29 @@ from flask import (
 )
 from flask_bootstrap import Bootstrap5
 from werkzeug.middleware.proxy_fix import ProxyFix
-
 from flight_form import FlightForm, SubscribeForm, TripAlertForm
 
-SEARCH_URL = "https://harperygxa.execute-api.eu-north-1.amazonaws.com/search"
-ALERT_URL = "https://harperygxa.execute-api.eu-north-1.amazonaws.com/alert"
-SUBSCRIPTION_URL = "https://harperygxa.execute-api.eu-north-1.amazonaws.com/subscribe"
-CHATBOT_URL = "https://harperygxa.execute-api.eu-north-1.amazonaws.com/chatbot"
+SEARCH_URL = os.environ.get("SEARCH_API")
+ALERT_URL = os.environ.get("ALERT_API")
+SUBSCRIPTION_URL = os.environ.get("SUBSCRIBE_API")
+CHATBOT_URL = os.environ.get("CHATBOT_API")
 
 app = Flask(__name__)
 Bootstrap5(app)
 app.config["PREFERRED_URL_SCHEME"] = "http"
-# app.config["PREFERRED_URL_SCHEME"] = "https" <- For when production domain is set up
+# app.config["PREFERRED_URL_SCHEME"] = "https" <- For when domain is set up
 app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY")
+
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # For Signup and Login
 oauth = OAuth(app)
+# Replace with current registration when new Infra is up.
 oauth.register(
     name="oidc",
-    authority="https://cognito-idp.eu-north-1.amazonaws.com/eu-north-1_RUNNAH0Lw",
-    client_id="2l31ncbok6dl0ob72bscurc1qp",
-    server_metadata_url="https://cognito-idp.eu-north-1.amazonaws.com/eu-north-1_RUNNAH0Lw/.well-known/openid-configuration",
+    authority=os.environ.get("COGNITO_AUTHORITY"),
+    client_id=os.environ.get("COGNITO_CLIENT_ID"),
+    server_metadata_url=f"{os.environ.get("COGNITO_SERVER_URL")}.well-known/openid-configuration",
     client_kwargs={"scope": "email openid"},
 )
 ##########
@@ -48,6 +49,7 @@ def login():
     # Alternate option to redirect to /authorize
     redirect_uri = url_for("authorize", _external=True)
     return oauth.oidc.authorize_redirect(redirect_uri)
+
 
 @app.route("/authorize")
 def authorize():
@@ -204,13 +206,6 @@ def pricing():
 @app.route("/faq")
 def faq():
     return render_template("faq.html", active_page="faq", user=session.get("user"))
-
-
-@app.route("/statistics")
-def statistics():
-    return render_template(
-        "statistics.html", active_page="statistics", user=session.get("user")
-    )
 
 
 @app.route("/contact", methods=["GET", "POST"])

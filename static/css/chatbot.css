@@ -18,9 +18,9 @@
     position: fixed;
     bottom: 90px;
     right: 20px;
-    width: 320px;
+    width: 380px;
     height: 420px;
-    background: white;
+    background: #000000a8;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     display: none;
@@ -38,17 +38,65 @@
     animation: fadeDown 1s ease forwards;
 }
 
+/* MESSAGE CONTAINER */
 #chatbot-messages {
     flex: 1;
     padding: 12px;
     overflow-y: auto;
     font-size: 0.9rem;
     animation: fadeUp 1s ease forwards;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: white;
 }
 
+/* BASE CHAT BUBBLE */
+.chat-message {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    animation: slideFade 0.4s ease forwards;
+}
+
+/* USER MESSAGE (RIGHT) */
+.chat-message.user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+/* BOT MESSAGE (LEFT) */
+.chat-message.bot {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.92);
+    color: #0f172a;
+    border-bottom-left-radius: 4px;
+}
+
+/* THINKING STATE */
+.chat-message.thinking {
+    font-style: italic;
+    opacity: 0.8;
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    animation: slideFade 0.4s ease forwards;
+}
+
+/* INPUT BAR */
 #chatbot-input {
     display: flex;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(255,255,255,0.15);
     animation: fadeUp 1s ease forwards;
 }
 
@@ -57,7 +105,7 @@
     padding: 10px;
     border: none;
     outline: none;
-    animation: fadeUp 1s ease forwards;
+    font-size: 0.9rem;
 }
 
 #chatbot-input button {
@@ -69,22 +117,19 @@
     animation: slideIn 1s ease forwards;
 }
 
-.bot-thinking {
-    font-style: italic;
-    color: #666;
-}
-
+/* THINKING DOTS ANIMATION */
 @keyframes dots {
-  0% { content: "."; }
-  33% { content: ".."; }
-  66% { content: "..."; }
+    0% { content: "."; }
+    33% { content: ".."; }
+    66% { content: "..."; }
 }
 
 .bot-thinking::after {
-  content: ".";
-  animation: dots 1.2s infinite;
+    content: ".";
+    animation: dots 1.2s infinite;
 }
 
+/* ANIMATIONS */
 @keyframes slideIn {
     from { opacity: 0; transform: translateX(-15px); }
     to { opacity: 1; transform: translateX(0); }

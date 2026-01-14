@@ -269,10 +269,12 @@ resource "aws_iam_role_policy" "chatbot_iam_policy" {
         "Sid" : "Statement1",
         "Effect" : "Allow",
         "Action" : [
-          "bedrock:InvokeModel"
+          "bedrock:InvokeModel",
+          "ssm:GetParameters"
         ],
         "Resource" : [
-          "arn:aws:bedrock:us-east-1::foundation-model/us.amazon.nova-2-lite-v1:0"
+          "arn:aws:bedrock:us-east-1::foundation-model/us.amazon.nova-2-lite-v1:0",
+          "arn:aws:ssm:eu-north-1:408852977582:parameter/GEMINI_AI_API_KEY"
         ]
       }
     ]
@@ -426,11 +428,6 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_policy" {
 
 resource "aws_iam_role_policy_attachment" "ssm_read_policy" {
   role       = aws_iam_role.ecs_task_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
-}
-
-resource "aws_iam_role_policy_attachment" "ssm_read_policy_for_exec_role" {
-  role       = aws_iam_role.ecs_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
 }
 #######################################################################################################################################

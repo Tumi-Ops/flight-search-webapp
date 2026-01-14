@@ -1,0 +1,8 @@
+# Example configuration for configmap as environment variables
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flightsyte-configmap
+data:
+  region: eu-north-1
+  #...

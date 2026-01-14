@@ -155,9 +155,10 @@ function removeThinking(id) {
 function appendMessage(sender, text) {
     const container = document.getElementById("chatbot-messages");
     const msg = document.createElement("div");
-    msg.style.marginBottom = "8px";
-    msg.style.textAlign = sender === "user" ? "right" : "left";
+
+    msg.classList.add("chat-message", sender);
     msg.innerText = text;
+
     container.appendChild(msg);
     container.scrollTop = container.scrollHeight;
 }

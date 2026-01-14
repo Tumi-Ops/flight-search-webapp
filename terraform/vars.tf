@@ -135,3 +135,7 @@ variable "amadeus_token_endpoint" {
   type        = string
 }
 
+variable "gemini_ai_model" {
+  description = "Googles Gemini AI model"
+  type        = string
+}

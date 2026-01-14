@@ -1,0 +1,13 @@
+# Kubernetes deployment yet to be properly scripted & tested. This is a rough understanding of how the files would work.
+apiVersion: v1
+kind: Service
+metadata:
+  name: flightsyte
+spec:
+  selector:
+    app: flightsyte
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer

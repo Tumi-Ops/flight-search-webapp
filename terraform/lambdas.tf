@@ -299,16 +299,20 @@ resource "aws_lambda_permission" "allow_subscribe_api_gateway" {
 #--------------------------------------------------------------------------------------------------------------------------------------
 
 resource "aws_lambda_function" "chatbot_function" {
-  filename      = "flightChatbot-function.zip"
+  image_uri     = "408852977582.dkr.ecr.eu-north-1.amazonaws.com/flightsyte-chatbot:latest"
   function_name = var.chatbot_lambda_function_name
   role          = aws_iam_role.chatbot_assume_role.arn
-  handler       = "lambda_function.lambda_handler"
-  runtime       = "python3.14"
-  architectures = ["x86_64"]
+  package_type  = "Image"
+  architectures = ["arm64"]
+
+  image_config {
+    entry_point = ["/lambda-entrypoint.sh"]
+    command     = ["lambda_function.lambda_handler"]
+  }
 
   description = "Chatbot functionality for FlightSyte."
 
-  memory_size = 128
+  memory_size = 1024
   timeout     = 120
 
   # Advanced logging configuration
@@ -322,6 +326,12 @@ resource "aws_lambda_function" "chatbot_function" {
   depends_on = [
     aws_iam_role.chatbot_assume_role, aws_iam_role_policy_attachment.chatbot_lambda_logs
   ]
+
+  environment {
+    variables = {
+      MODEL_ID = var.gemini_ai_model
+    }
+  }
 
   tags = {
     Name        = "flightSyte"
@@ -347,3 +357,12 @@ resource "aws_lambda_layer_version" "request_layer" {
 
   compatible_architectures = ["x86_64"]
 }
+#
+# resource "aws_lambda_layer_version" "google_genai_layer" {
+#   filename            = "google-genai-layer.zip"
+#   layer_name          = "google_dependency_layer"
+#   description         = "Google Genai dependency for chatbot Lambda function"
+#   compatible_runtimes = ["python3.14"]
+#
+#   compatible_architectures = ["x86_64"]
+# }

@@ -30,12 +30,22 @@ resource "aws_ecs_task_definition" "flightsyte_task" {
 
       portMappings = [{
         containerPort = 5000
-        hostPort      = 5000
         protocol      = "tcp"
       }]
 
+      environment = [
+        { name = "SEARCH_API", value = "${aws_apigatewayv2_stage.api_gateway_stage.invoke_url}/search" },
+        { name = "ALERT_API", value = "${aws_apigatewayv2_stage.api_gateway_stage.invoke_url}/alert" },
+        { name = "SUBSCRIBE_API", value = "${aws_apigatewayv2_stage.api_gateway_stage.invoke_url}/subscribe" },
+        { name = "CHATBOT_API", value = "${aws_apigatewayv2_stage.api_gateway_stage.invoke_url}/chat" },
+        { name  = "COGNITO_AUTHORITY", value = aws_cognito_user_pool.FlightSyteUserPool.endpoint },
+        { name  = "COGNITO_CLIENT_ID", value = aws_cognito_user_pool_client.FlightSyteClient.id },
+        { name  = "COGNITO_SERVER_URL", value = "${aws_cognito_user_pool.FlightSyteUserPool.endpoint}/.well-known/openid-configuration"
+        }
+      ]
+
       secrets = [
-        { name = "FLASK_SECRET_KEY", valueFrom = "arn:aws:ssm:eu-north-1:408852977582:parameter/FLASK_SECRET_KEY" }
+        { name = "FLASK_SECRET_KEY", valueFrom = "arn:aws:ssm:eu-north-1:408852977582:parameter/FLASK_SECRET_KEY" } # or can be referenced from ssm.tf when created
       ]
 
       essential = true
@@ -82,6 +92,7 @@ resource "aws_ecs_service" "flightsyte_app" {
   }
 
   depends_on = [aws_lb_listener.flightsyte_frontend_http]
+  # depends_on = [aws_lb_listener.flightsyte_frontend_https] for when domain is setup
   tags = {
     Environment = "test"
     Project     = "FlightSyte"

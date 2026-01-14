@@ -1,14 +1,14 @@
-name: "AWS-Infra-Terraform-CI/CD"
+name: "AWS-Infra-Build"
 
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - "terraform/**"
-  pull_request:
-    branches: [ main ]
-    paths:
-      - "terraform/**"
+#on:
+#  push:
+#    branches: [ main ]
+#    paths:
+#      - "terraform/**"
+#  pull_request:
+#    branches: [ main ]
+#    paths:
+#      - "terraform/**"
 
 permissions:
   contents: read

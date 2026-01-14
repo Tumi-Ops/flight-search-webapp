@@ -1,0 +1,19 @@
+# Kubernetes deployment yet to be properly scripted & tested. This a rough ingress for when domain is set up.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flightsyte-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: flightsyte.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: flightsyte-service
+                port:
+                  number: 80

@@ -1,14 +1,14 @@
 name: "Build-Publish-FlightSyte-Image"
 #
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - "templates/**"
-      - "static/**"
-      - "**.py"
-      - "Dockerfile"
-      - "requirements.txt"
+#on:
+#  push:
+#    branches: [ main ]
+#    paths:
+#      - "templates/**"
+#      - "static/**"
+#      - "**.py"
+#      - "Dockerfile"
+#      - "requirements.txt"
 
 # Need ID token write permission to use OIDC
 permissions:
@@ -94,7 +94,7 @@ jobs:
           task-definition: task-definition.json
           container-name: flightsyte
           image: ${{ steps.build-image.outputs.image }}
-            
+
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:

@@ -28,3 +28,4 @@ amadeus_cities_endpoint        = "https://test.api.amadeus.com/v1/reference-data
 amadeus_flight_offers_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 amadeus_locations_endpoint     = "https://test.api.amadeus.com/v1/reference-data/locations"
 amadeus_token_endpoint         = "https://test.api.amadeus.com/v1/security/oauth2/token"
+gemini_ai_model                = "gemini-2.5-flash"
