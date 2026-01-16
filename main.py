@@ -27,7 +27,7 @@ app = Flask(__name__)
 Bootstrap5(app)
 app.config["PREFERRED_URL_SCHEME"] = "http"
 # app.config["PREFERRED_URL_SCHEME"] = "https" <- For when domain is set up
-app.config["SECRET_KEY"] = os.environ.get("FLASK_SECRET_KEY")
+app.config["SECRET_KEY"] = 'os.environ.get("FLASK_SECRET_KEY")'
 
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
@@ -313,4 +313,4 @@ def search_for_flight():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000, host="0.0.0.0")
+    app.run(debug=True, port=5000)
