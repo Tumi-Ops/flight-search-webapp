@@ -1,4 +1,5 @@
 <a id="top"></a>
+
 # Flight Search Web Application Demonstration
 
 <!-- TABLE OF CONTENTS -->
@@ -6,18 +7,15 @@
   <summary>Table of Contents</summary>
 <ul>
     <li><a href="#project-notes">Homepage</a></li>
-    <li><a href="#authentications">Authentications</a></li>
-        <ul>
-            <li><a href="#login">Login</a></li>
-            <li><a href="#sign-up">Sign Up</a></li>
-            <li><a href="#login-method">Login Method</a></li>
-            <li><a href="#forgot-password">Forgot Password</a></li>
-        </ul>
+    <li><a href="#login">Login</a></li>
+    <li><a href="#sign-up">Sign Up</a></li>
+    <li><a href="#login-method">Login Method</a></li>
+    <li><a href="#forgot-password">Forgot Password</a></li>
     <li><a href="flight_search">Flight Search</a></li>
     <li><a href="#flight_search-result">Flight Search Result</a></li>
     <li><a href="#set-trip">Set Trip</a></li>
     <li><a href="#view-trips">View Trips</a></li>
-    <li><a href="#trip-email">Found Flight Email<a/></li>
+    <li><a href="#found-flight-email">Found Flight Email<a/></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -32,7 +30,6 @@
 
 ******
 
-## Authentications
 ## ***Login***
 
 ![Login](/demo/login.png)
@@ -60,37 +57,45 @@
 <p align="right"><a href="#top">⬆ Back to top</a></p>
 
 ******
+
 ## ***Flight Search***
 
-![Flight Search](/demo/)
+![Flight Search](/demo/flihgt_search.png)
 
 ## ***Flight Search Result***
 
-![Flight Search](/demo/)
-
+![Flight Search Result](/demo/flight_result.png)
+******
 ## ***Set Trip***
 
-![Set Trip](/demo/)
+![Set Trip](/demo/set_trip.png)
+
+## ***Trip Set***
+
+![Set Trip](/demo/successful_trip_set.png)
 
 ## ***View Trips***
 
-![View Trips](/demo/)
+![View Trips](/demo/view_trips.png)
 
-# ***Flight Email***
+# ***Found Flight Email***
 
 ![Flight Email](/demo/)
 
+<p align="right"><a href="#top">⬆ Back to top</a></p>
+
+******
+
 # ***Pricing***
 
-![Pricing](/demo/)
+![Pricing](/demo/pricing.png)
 
 # ***About***
 
-![About](/demo/)
+![About](/demo/faq.png)
 
 # ***Contact***
 
-![Contact](/demo/)
-![Contact](/demo/)
+![Contact](/demo/contact.png)
 
 <p align="right"><a href="#top">⬆ Back to top</a></p>
