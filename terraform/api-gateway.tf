@@ -186,7 +186,10 @@ resource "aws_apigatewayv2_deployment" "api_gateway_deployment" {
     redeployment = sha1(jsonencode(aws_apigatewayv2_api.http_api))
   }
 
-  depends_on = [aws_apigatewayv2_api.http_api, aws_apigatewayv2_stage.api_gateway_stage]
+  depends_on = [aws_apigatewayv2_api.http_api, aws_apigatewayv2_stage.api_gateway_stage, aws_apigatewayv2_route.post_route,
+    aws_apigatewayv2_route.get_route, aws_apigatewayv2_route.delete_route,
+    aws_apigatewayv2_route.search_post_route, aws_apigatewayv2_route.chatbot_route,
+    aws_apigatewayv2_route.subscribe_route]
 }
 
 resource "aws_apigatewayv2_authorizer" "api_authorizer" {
