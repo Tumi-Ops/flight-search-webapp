@@ -6,7 +6,7 @@
 <details>
   <summary>Table of Contents</summary>
 <ul>
-    <li><a href="#project-notes">Homepage</a></li>
+    <li><a href="#homepage">Homepage</a></li>
     <li><a href="#login">Login</a></li>
     <li><a href="#sign-up">Sign Up</a></li>
     <li><a href="#login-method">Login Method</a></li>
@@ -57,7 +57,7 @@
 
 ## ***Flight Search***
 
-![Flight Search](/demo/flihgt_search.png)
+![Flight Search](/demo/flight_search.png)
 
 ![Flight Search Result](/demo/flight_result.png)
 
@@ -66,6 +66,8 @@
 
 ![Chatbot](/demo/flightbot.png)
 ![Chatbot](/demo/flightbot_result.png)
+
+<p align="right"><a href="#top">⬆ Back to top</a></p>
 
 ******
 ## ***Set Trip***
@@ -79,8 +81,6 @@
 # ***Found Flight Email***
 
 ![Flight Email](/demo/trip_alert_email.png)
-
-<p align="right"><a href="#top">⬆ Back to top</a></p>
 
 ******
 

@@ -88,31 +88,10 @@ This repository reflects a production-style separation of concerns, with clear d
 ## Requirements
 
 - Internet connection
-- Python 3.12 or higher (For local execution)
 - Docker Desktop (For Docker execution) 
 - ***Or see Demo Readme file in demo folder***
-- ***Note: ECS Fargate execution can be deployed any time on HTTP ALB with limited functionality of the site. Cognito requires HTTPS, which means Route53. This will only be setup in production. Local & Docker executions have full functionality though.***
+- ***Note: ECS Fargate execution can be deployed any time on HTTP ALB with limited functionality of the site. Cognito requires HTTPS, which means Route53. This will only be setup in production. Local & Docker executions have full functionality.***
 
-
-## Installation - Local Execution
-
-1. Clone the git repository:
-    ```bash
-    $ git clone <git-url>
-    $ cd Flight-Search-Webapp
-   ```
-
-2. Install required packages:
-    ```bash
-    $ pip install -r requirements.txt
-   ```
-
-3. Execute the program and visit the IP Address shown on terminal:
-    ```bash
-    $ python main.py
-    $ example: * Running on http://192.0.0.1:3002
-   ```
-<p align="right"><a href="#top">⬆ Back to top</a></p>
 
 ## Installation(Docker Execution)
 
@@ -145,30 +124,6 @@ e.g. http://localhost:5000
 - API Server Errors, KeyError:
   - Make sure you have internet connection
   - Try again after 5-10 minutes
-
-**"Module not found" error?**
-- Run `pip install -r requirements.txt` first
-
-**Python not found?**
-- Download Python from [python.org](https://python.org)
-- Make sure to check "Add Python to PATH" during installation
-- Alternative commands:
-  ```bash
-  $ python -m pip install -r requirements.txt
-  or
-  $ python3 -m pip install -r requirements.txt
-  or
-  $ py -m pip install -r requirements.txt
-    ```
-    ```bash
-    $ py main.py
-    ```
-
-**Still having issues, try these:**
-- Check Python version: `python --version`
-- Ensure you're in the project directory
-- Copy the error and paste on Google or a Gen A.I. tool.
-- Open an issue on GitHub with your error message
 
 <p align="right"><a href="#top">⬆ Back to top</a></p>
 

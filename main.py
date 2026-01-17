@@ -19,16 +19,13 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 from flight_form import FlightForm, SubscribeForm, TripAlertForm
 
-SEARCH_URL = os.environ.get("SEARCH_API")
-ALERT_URL = os.environ.get("ALERT_API")
-SUBSCRIPTION_URL = os.environ.get("SUBSCRIBE_API")
-CHATBOT_URL = os.environ.get("CHATBOT_API")
+URL = os.environ.get("API_GATEWAY_URL")
 
 app = Flask(__name__)
 Bootstrap5(app)
 app.config["PREFERRED_URL_SCHEME"] = "http"
 # app.config["PREFERRED_URL_SCHEME"] = "https" <- For when domain is set up
-app.config["SECRET_KEY"] = 'os.environ.get("FLASK_SECRET_KEY")'
+app.config["SECRET_KEY"] = 'os.environ.get("FLASK_SECRET_KEY")' # <- Set up long random key in production
 
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
@@ -120,7 +117,7 @@ def trip_alert():
     alerts = []
     if user:
         api_headers = build_api_headers()
-        read_response = requests.get(url=ALERT_URL, headers=api_headers, timeout=30)
+        read_response = requests.get(url=f"{URL}/alert", headers=api_headers, timeout=30)
 
         items = read_response.json()
         if items:
@@ -142,7 +139,7 @@ def trip_alert():
                 }
 
                 api_gateway_response = requests.post(
-                    url=ALERT_URL, headers=api_headers, json=payload, timeout=30
+                    url=f"{URL}/alert", headers=api_headers, json=payload, timeout=30
                 )
                 if api_gateway_response.status_code == 200:
                     print(f"\n✅ {api_gateway_response.text}")
@@ -186,7 +183,7 @@ def delete_alert(alert_id):
         api_headers = build_api_headers()
         payload = {"created_at": alert_id}
         api_gateway_response = requests.delete(
-            url=ALERT_URL, headers=api_headers, json=payload, timeout=30
+            url=f"{URL}/alert", headers=api_headers, json=payload, timeout=30
         )
         if api_gateway_response.status_code == 200:
             print(f"\n✅ {api_gateway_response.text}")
@@ -215,7 +212,7 @@ def contact():
     if form.validate_on_submit():
         payload = {"email": form.email.data}
         api_gateway_response = requests.post(
-            url=SUBSCRIPTION_URL,
+            url=f"{URL}/subscribe",
             headers={
                 "Content-Type": "application/json",
             },
@@ -245,7 +242,7 @@ def chat():
     query = request.json["message"]
 
     response = requests.post(
-        CHATBOT_URL,
+        f"{URL}/chatbot",
         headers={
             "Content-Type": "application/json",
         },
@@ -276,7 +273,7 @@ def search_for_flight():
         }
 
         api_gateway_response = requests.post(
-            url=SEARCH_URL, headers=api_headers, json=payload, timeout=30
+            url=f"{URL}/search", headers=api_headers, json=payload, timeout=30
         )
 
         if api_gateway_response.status_code == 200:
@@ -314,4 +311,4 @@ def search_for_flight():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5000, host='0.0.0.0')
