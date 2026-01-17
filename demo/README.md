@@ -12,12 +12,9 @@
     <li><a href="#login-method">Login Method</a></li>
     <li><a href="#forgot-password">Forgot Password</a></li>
     <li><a href="flight_search">Flight Search</a></li>
-    <li><a href="#flight_search-result">Flight Search Result</a></li>
+    <li><a href="#chatbot">Chatbot</a></li>
     <li><a href="#set-trip">Set Trip</a></li>
-    <li><a href="#view-trips">View Trips</a></li>
     <li><a href="#found-flight-email">Found Flight Email<a/></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </details>
@@ -26,7 +23,7 @@
 
 ## Homepage
 
-![Homepage](/demo/)
+![Homepage](/demo/homepage.png)
 
 ******
 
@@ -62,37 +59,30 @@
 
 ![Flight Search](/demo/flihgt_search.png)
 
-## ***Flight Search Result***
-
 ![Flight Search Result](/demo/flight_result.png)
+
+******
+## ***Chatbot***
+
+![Chatbot](/demo/flightbot.png)
+![Chatbot](/demo/flightbot_result.png)
+
 ******
 ## ***Set Trip***
 
 ![Set Trip](/demo/set_trip.png)
 
-## ***Trip Set***
-
 ![Set Trip](/demo/successful_trip_set.png)
-
-## ***View Trips***
 
 ![View Trips](/demo/view_trips.png)
 
 # ***Found Flight Email***
 
-![Flight Email](/demo/)
+![Flight Email](/demo/trip_alert_email.png)
 
 <p align="right"><a href="#top">⬆ Back to top</a></p>
 
 ******
-
-# ***Pricing***
-
-![Pricing](/demo/pricing.png)
-
-# ***About***
-
-![About](/demo/faq.png)
 
 # ***Contact***
 

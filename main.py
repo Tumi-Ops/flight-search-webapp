@@ -39,7 +39,7 @@ oauth.register(
     name="oidc",
     authority=os.environ.get("COGNITO_AUTHORITY"),
     client_id=os.environ.get("COGNITO_CLIENT_ID"),
-    server_metadata_url=f"{os.environ.get('COGNITO_SERVER_URL')}.well-known/openid-configuration",
+    server_metadata_url=f"{os.environ.get('COGNITO_AUTHORITY')}/.well-known/openid-configuration",
     client_kwargs={"scope": "email openid"},
 )
 ##########

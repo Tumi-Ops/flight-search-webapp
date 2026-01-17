@@ -39,9 +39,7 @@ resource "aws_ecs_task_definition" "flightsyte_task" {
         { name = "SUBSCRIBE_API", value = "${aws_apigatewayv2_stage.api_gateway_stage.invoke_url}/subscribe" },
         { name = "CHATBOT_API", value = "${aws_apigatewayv2_stage.api_gateway_stage.invoke_url}/chat" },
         { name  = "COGNITO_AUTHORITY", value = aws_cognito_user_pool.FlightSyteUserPool.endpoint },
-        { name  = "COGNITO_CLIENT_ID", value = aws_cognito_user_pool_client.FlightSyteClient.id },
-        { name  = "COGNITO_SERVER_URL", value = "${aws_cognito_user_pool.FlightSyteUserPool.endpoint}/.well-known/openid-configuration"
-        }
+        { name  = "COGNITO_CLIENT_ID", value = aws_cognito_user_pool_client.FlightSyteClient.id }
       ]
 
       secrets = [
