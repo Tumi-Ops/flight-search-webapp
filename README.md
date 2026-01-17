@@ -91,6 +91,7 @@ This repository reflects a production-style separation of concerns, with clear d
 - Python 3.12 or higher (For local execution)
 - Docker Desktop (For Docker execution) 
 - ***Or see Demo Readme file in demo folder***
+- ***Note: ECS Fargate execution can be deployed any time on HTTP ALB with limited functionality of the site. Cognito requires HTTPS, which means Route53. This will only be setup in production. Local & Docker executions have full functionality though.***
 
 
 ## Installation - Local Execution
@@ -120,9 +121,12 @@ This repository reflects a production-style separation of concerns, with clear d
 2. Open the Docker app and make sure Docker is running
  
 3. Run the program:
-    ```bash
-    $ docker run tomdocks7/flightsyte -p 5000:5000
+   ```bash
+    $ docker run -p 5000:5000 -d tomdocks7/flightsyte
    ```
+4. Visit the site using the containers link from the running container,
+e.g. http://localhost:5000
+
 
 ## Troubleshooting
 

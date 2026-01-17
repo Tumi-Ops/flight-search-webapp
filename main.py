@@ -296,7 +296,7 @@ def search_for_flight():
             structured_flights = []
 
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error: {e} ")
 
     session["flight_messages"] = offer_messages
     session["structured_flights"] = structured_flights

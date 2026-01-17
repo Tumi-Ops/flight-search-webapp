@@ -20,9 +20,9 @@ In order to run this container you'll need docker installed.
 
 #### Container Parameters
 
-```shell
-  docker run -it tomdocks7/flightsyte -p 5000:5000
-```
+   ```bash
+    $ docker run -p 5000:5000 -d tomdocks7/flightsyte
+   ```
 
 #### Environment Variables
 
