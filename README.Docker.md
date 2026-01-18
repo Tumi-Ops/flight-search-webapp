@@ -26,7 +26,9 @@ In order to run this container you'll need docker installed.
 
 #### Environment Variables
 
-* N/A
+* ENV API_GATEWAY_URL
+* ENV COGNITO_CLIENT_ID
+* ENV OIDC_AUTHORITY_URL
 #### Volumes
 
 * N/A

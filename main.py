@@ -34,9 +34,9 @@ oauth = OAuth(app)
 # Replace with current registration when new Infra is up.
 oauth.register(
     name="oidc",
-    authority=os.environ.get("COGNITO_AUTHORITY"),
+    authority=os.environ.get("OIDC_AUTHORITY_URL"),
     client_id=os.environ.get("COGNITO_CLIENT_ID"),
-    server_metadata_url=f"{os.environ.get('COGNITO_AUTHORITY')}/.well-known/openid-configuration",
+    server_metadata_url=f"{os.environ.get('OIDC_AUTHORITY_URL')}/.well-known/openid-configuration",
     client_kwargs={"scope": "email openid"},
 )
 ##########

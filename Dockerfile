@@ -17,6 +17,10 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 
+ENV API_GATEWAY_URL="https://ldxejcs56d.execute-api.eu-north-1.amazonaws.com"
+ENV COGNITO_CLIENT_ID="5n1qsvctt1fehq07dida9sbij7"
+ENV OIDC_AUTHORITY_URL="https://cognito-idp.eu-north-1.amazonaws.com/eu-north-1_Y9IgDZbnY"
+
 COPY . .
 
 RUN --mount=type=cache,target=/root/.cache/pip \
