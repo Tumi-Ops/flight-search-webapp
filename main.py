@@ -24,8 +24,9 @@ URL = os.environ.get("API_GATEWAY_URL")
 app = Flask(__name__)
 Bootstrap5(app)
 app.config["PREFERRED_URL_SCHEME"] = "http"
-# app.config["PREFERRED_URL_SCHEME"] = "https" <- For when domain is set up
-app.config["SECRET_KEY"] = 'os.environ.get("FLASK_SECRET_KEY")' # <- Set up long random key in production
+app.config["SERVER_NAME"] = "localhost:5000"
+app.config["SECRET_KEY"] = 'os.environ.get("FLASK_SECRET_KEY")'  # <- Set up long random key in production
+app.secret_key = "os.getenv('SECRET_KEY')"  # Use a secure random key in production
 
 app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
@@ -34,11 +35,13 @@ oauth = OAuth(app)
 # Replace with current registration when new Infra is up.
 oauth.register(
     name="oidc",
-    authority=os.environ.get("OIDC_AUTHORITY_URL"),
-    client_id=os.environ.get("COGNITO_CLIENT_ID"),
-    server_metadata_url=f"{os.environ.get('OIDC_AUTHORITY_URL')}/.well-known/openid-configuration",
+    authority="https://cognito-idp.eu-north-1.amazonaws.com/eu-north-1_Y9IgDZbnY",
+    client_id="5n1qsvctt1fehq07dida9sbij7",
+    server_metadata_url=f"https://cognito-idp.eu-north-1.amazonaws.com/eu-north-1_Y9IgDZbnY/.well-known/openid-configuration",
     client_kwargs={"scope": "email openid"},
 )
+
+
 ##########
 
 
@@ -115,6 +118,7 @@ def trip_alert():
     form = TripAlertForm()
     user = session.get("user")
     alerts = []
+
     if user:
         api_headers = build_api_headers()
         read_response = requests.get(url=f"{URL}/alert", headers=api_headers, timeout=30)
